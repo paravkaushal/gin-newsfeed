@@ -6,8 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func PingGet(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Yo!",
-	})
+func PingGet() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Yo!",
+		})
+	}
 }
