@@ -1,23 +1,21 @@
 package main
 
 import (
-	"fmt"
+	"gin-newsfeed/httpd/handler"
 	"gin-newsfeed/platform/newsfeed"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// fmt.Println("We good")
-
-	// r := gin.Default()
-
-	// r.GET("/ping", handler.PingGet())
-	// r.Run()
 
 	feed := newsfeed.New()
+	r := gin.Default()
 
-	fmt.Println(feed)
+	r.GET("/ping", handler.PingGet())
+	r.GET("/newsfeed", handler.NewsFeedGet(feed))
+	r.POST("/newsfeed", handler.NewsFeedPost(feed))
 
-	feed.Add(newsfeed.Item{"Hello", "What are you upto"})
+	r.Run()
 
-	fmt.Println(feed)
 }
